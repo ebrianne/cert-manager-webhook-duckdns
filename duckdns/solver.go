@@ -88,9 +88,9 @@ func (s *duckDNSProviderSolver) getDNSName(ch *v1alpha1.ChallengeRequest) []stri
 	duckdnszone = util.UnFqdn(duckdnszone)                             //<suffix>.<domain> or <domain>
 	split := strings.Split(duckdnszone, ".")
 
-	if len(split) == 2 {
-		klog.Infof("Got dns domain from challenge %v", split[1])
-		out = append(out, split[1])
+	if len(split) > 1 {
+		klog.Infof("Got dns domain from challenge %v", split[len(split)-1])
+		out = append(out, split[len(split)-1])
 		return out
 	}
 
